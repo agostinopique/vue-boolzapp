@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="boolzapp">
+
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.css' integrity='sha512-1hsteeq9xTM5CX6NsXiJu3Y/g+tj+IIwtZMtTisemEv3hx+S9ngaW4nryrNcPM4xGzINcKbwUJtojslX2KG+DQ==' crossorigin='anonymous'/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    <link rel="stylesheet" href="./style/style.css">
+
+    <title>boolzApp</title>
+</head>
+<body>
+
+    <!-- BACKGROUND -->
+    <div class="background-container">
+
+        <div class="top-bc"></div>
+
+        <div class="bottom-bc"></div>
+
+        <!-- APP WINDOW -->
+        <div id="app" class="">
+
+            <!-- CONTACTS SECTION -->
+            <div id="contact-sct" class="">
+
+                <!-- MY PROFILE -->
+                <div class="my-profile">
+                    <div class="my-info">
+                        <div class="profile-img">
+                            <img src="./img/avatar_1.jpg" alt="">
+                        </div>
+                        <span>Nome utente</span>
+                    </div>
+                    <div class="profile-icons">
+                        <i class="fa-solid fa-circle-notch"></i>
+                        <i class="fa-solid fa-message"></i>
+                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                    </div>
+                </div>
+                <!-- /MY PROFILE -->
+
+                <div class="notifications">
+                    <div class="notification-img">
+                        <span>
+                            <i class="fa-solid fa-bell-slash"></i>
+                        </span>
+                    </div>
+                    <div>
+                        <p>Ricevi notifiche di nuovi messaggi</p>
+                        <a href="#">Attiva notifiche desktop</a>
+                    </div>
+                </div>
+                <div class="search-chat">
+                    <div class="magnifier">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                    <div>
+                        <input type="text" placeholder="Cerca o inizia una nuova chat" id="chat-search">
+                    </div>
+                </div>
+                <div class="active-chats">
+
+                    <div class="chat">
+                        <div class="contact-img">
+                            <img src="./img/avatar_2.jpg" alt="">
+                        </div>
+                        <div class="contact-info">
+                            <div>
+                                <h3>Michele</h3>
+                                <p class="last-message">OOOK!</p>
+                            </div>
+                            <div class="date-last-msg">
+                                <p>date last text</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chat">
+                        <div class="contact-img">
+                            <img src="./img/avatar_2.jpg" alt="">
+                        </div>
+                        <div class="contact-info">
+                            <div>
+                                <h3>Michele</h3>
+                                <p class="last-message">OOOK!</p>
+                            </div>
+                            <div class="date-last-msg">
+                                <p>date last text</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chat">
+                        <div class="contact-img">
+                            <img src="./img/avatar_2.jpg" alt="">
+                        </div>
+                        <div class="contact-info">
+                            <div>
+                                <h3>Michele</h3>
+                                <p class="last-message">OOOK!</p>
+                            </div>
+                            <div class="date-last-msg">
+                                <p>date last text</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                </div>
+
+            </div>
+            <!-- /CONTACTS SECTION -->
+
+            <!-- CHAT SECTION -->
+            <div id="chat-sct" class="">
+
+                <div class="active-user">
+                    <div class="user">
+                        <div class="contact-img">
+                            <img src="./img/avatar_2.jpg" alt="">
+                        </div>
+                        <div class="contact-info ">
+                            <div class="user-info">
+                                <h3>Michele</h3>
+                                <p class="last-access">Ultimo accesso oggi alle</p>
+                            </div>
+                            <div class="user-icons">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                <i class="fa-solid fa-paperclip"></i>
+                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <div class="text-area">
+                    
+                </div>
+            </div>
+            <!-- /CHAT SECTION -->
+        </div>
+            <!-- /APP WINDOW -->
+    </div>
+</body>
+</html>
