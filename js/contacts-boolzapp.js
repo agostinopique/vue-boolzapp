@@ -178,11 +178,26 @@ const app = new Vue({
 
     methods: {
 
+        findUser(){
+            const searchUser = this.searchUser.toLowerCase();
+            console.log(searchUser);
+            const userMatch = this.users.filter((user) => user.name.includes(this.searchUser));
+            console.log(userMatch)
+        },
+
+        getLastMessage(user){
+            const {messages} = user;
+            return messages[messages.length - 1].message;
+        },
+
         getLastDate(user){
-            return this.user
-        }
+            const {messages} = user;
+            return messages[messages.length - 1].date;
+        },
 
         newMessageData(){
+
+            // AGGIUSTARE MECCANISMO DI CREAZIONE DELL'ORA
             const today = new Date();
             const actualDay = today.getDay();
             const actualMonth = (today.getMonth()+1);
@@ -216,8 +231,7 @@ const app = new Vue({
                 this.users[this.activeUser].messages.push(newMsg);
                 this.newMessage = '';
                 
-                setTimeout((actualDate) => {
-    
+                setTimeout(() => {
                     const newReply =  {
                         date: actualDate,
                         message: 'You can run but you can\'t hide Bitch!',
@@ -230,15 +244,12 @@ const app = new Vue({
             
         },
 
-        // newReply(actualDate){
+        
+    },
 
-        //     const newReply =  {
-        //         date: actualDate,
-        //         message: 'Fuck off!',
-        //         status: 'received'
-        //     };
-        //     this.users[this.activeUser].messages.push(newReply);
-            
+    mounted: {
+        // capitalizeModels(){
+        //     this.searchUser = this.searchUser.capitalize();
         // }
     }
 

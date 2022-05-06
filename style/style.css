@@ -11,6 +11,7 @@ body{
 
 /* BACKGROUND */
 .background-container{
+    display: flex;
     height: 100vh;
     width: 100%;
     background: 
@@ -26,7 +27,7 @@ body{
     min-width: 800px;
     height: 85vh;
     background-color: white;
-    border: 1px solid grey;
+    border: 1px solid lightgrey;
     margin: auto;
 }
 
@@ -131,9 +132,10 @@ body{
     height: 35px;
     width: 100%;
     padding-left: 5px;
-    border: none;
+    border-radius: 3px;
     border: 1px solid #EAEAEA;
     border-left: none;
+    /* text-transform: capitalize; */
 }
 
 /* /SEARCH BAR */
@@ -301,7 +303,8 @@ body{
     height: 100%;
     width: 100%;
     border-radius: 5px;
-    border: 2px solid #037AFF;
+    border: none;
+    /* border: 2px solid #037AFF; */
 
 }
 
