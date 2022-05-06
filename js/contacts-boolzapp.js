@@ -171,9 +171,59 @@ const app = new Vue({
             }
         ],
 
-        activeUser: 0
-        
+        activeUser: 0,
+        newMessage: ''
     },
+
+    methods: {
+        newMessageData(){
+            const today = new Date();
+            const actualDay = today.getDay();
+            const actualMonth = (today.getMonth()+1);
+            const actualHour = today.getHours();
+            const actualMin = today.getMinutes();
+            const actualSec = today.getSeconds();
+
+            function dateAdjust(actualNumber){
+                
+                if(actualNumber < 10){
+                    return '0' + actualNumber;
+                }
+                return actualNumber
+            };
+
+
+            const actualDate = 
+                dateAdjust(actualDay) + '/' + 
+                dateAdjust(actualMonth) + '/' + 
+                today.getFullYear() + ' ' + 
+                dateAdjust(actualHour) + ':' +
+                dateAdjust(actualMin) + ':' + 
+                dateAdjust(actualSec);
+            
+            const newMsg =  {
+                date: actualDate,
+                message: this.newMessage,
+                status: 'sent'
+            }
+            if(this.newMessage.length > 0){
+                this.users[this.activeUser].messages.push(newMsg);
+                this.newMessage = '';
+            };
+
+            setTimeout( newReply(actualDate), 1500);
+        },
+
+        newReply(actualDate){
+            const newMsg =  {
+                date: actualDate,
+                message: 'Ma vai in culo!',
+                status: 'received'
+            }
+
+            this.users[this.activeUser].messages.push(newMsg);
+        }
+    }
 
 })
     

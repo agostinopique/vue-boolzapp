@@ -132,7 +132,11 @@
                         <i class="fa-regular fa-face-smile"></i>
                     </div>
                     <div class="input-sct">
-                        <input type="text" placeholder="Scrivi un messagio" id="">
+                        <input
+                            @keyup.enter="newMessageData()" 
+                            v-model="newMessage" 
+                            type="text" 
+                            placeholder="Scrivi un messagio">
                     </div>
                     <div class="audio-record">
                         <i class="fa-solid fa-microphone"></i>
