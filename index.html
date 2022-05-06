@@ -25,10 +25,6 @@
     <!-- BACKGROUND -->
     <div class="background-container">
 
-        <div class="top-bc"></div>
-
-        <div class="bottom-bc"></div>
-
         <!-- APP WINDOW -->
         <div id="app" class="">
 
@@ -39,9 +35,9 @@
                 <div class="my-profile">
                     <div class="my-info">
                         <div class="profile-img">
-                            <img src="./img/avatar_1.jpg" alt="">
+                            <img :src="`./img/avatar${myUser.avatar}.jpg`" :alt="myUser.name">
                         </div>
-                        <span>Nome utente</span>
+                        <span>{{myUser.name}}</span>
                     </div>
                     <div class="profile-icons">
                         <i class="fa-solid fa-circle-notch"></i>
@@ -62,57 +58,32 @@
                         <a href="#">Attiva notifiche desktop</a>
                     </div>
                 </div>
+
                 <div class="search-chat">
                     <div class="magnifier">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </div>
-                    <div>
+                    <div class="search-bar">
                         <input type="text" placeholder="Cerca o inizia una nuova chat" id="chat-search">
                     </div>
                 </div>
+
                 <div class="active-chats">
 
-                    <div class="chat">
+                    <div 
+                        v-for="(user, index) in users"
+                        class="chat"
+                        @click="activeUser = index">
                         <div class="contact-img">
-                            <img src="./img/avatar_2.jpg" alt="">
+                            <img :src="`./img/avatar${user.avatar}.jpg`" :alt="user.name">
                         </div>
                         <div class="contact-info">
-                            <div>
-                                <h3>Michele</h3>
-                                <p class="last-message">OOOK!</p>
+                            <div class="status-info">
+                                <h3>{{user.name}}</h3>
+                                <p class="last-message">{{users[index].messages[1].message}}</p>
                             </div>
                             <div class="date-last-msg">
-                                <p>date last text</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="chat">
-                        <div class="contact-img">
-                            <img src="./img/avatar_2.jpg" alt="">
-                        </div>
-                        <div class="contact-info">
-                            <div>
-                                <h3>Michele</h3>
-                                <p class="last-message">OOOK!</p>
-                            </div>
-                            <div class="date-last-msg">
-                                <p>date last text</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="chat">
-                        <div class="contact-img">
-                            <img src="./img/avatar_2.jpg" alt="">
-                        </div>
-                        <div class="contact-info">
-                            <div>
-                                <h3>Michele</h3>
-                                <p class="last-message">OOOK!</p>
-                            </div>
-                            <div class="date-last-msg">
-                                <p>date last text</p>
+                                <p>{{users[index].messages[1].date}}</p>
                             </div>
                         </div>
                     </div>
@@ -129,11 +100,11 @@
                 <div class="active-user">
                     <div class="user">
                         <div class="contact-img">
-                            <img src="./img/avatar_2.jpg" alt="">
+                            <img :src="`./img/avatar${users[activeUser].avatar}.jpg`" :alt="users[activeUser].avatar">
                         </div>
                         <div class="contact-info ">
                             <div class="user-info">
-                                <h3>Michele</h3>
+                                <h3>{{users[activeUser].name}}</h3>
                                 <p class="last-access">Ultimo accesso oggi alle</p>
                             </div>
                             <div class="user-icons">
@@ -147,22 +118,14 @@
                 </div>
 
                 <div class="text-area">
-                    <div class="message sent">
-                        <div class="text-message">cioacioacioa1</div>
-                        <div class="message-time">date date date</div>
+                    <div
+                        v-for="envelope in users[activeUser].messages"
+                        :class="envelope.status"
+                        class="message">
+                        <div class="text-message">{{envelope.message}}</div>
+                        <div class="message-time">{{envelope.date}}</div>
                     </div>
-                    <div class="message delivered">
-                        <div class="text-message">cioaci Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni nostrum eveniet necessitatibus, eligendi culpa magnam totam? Soluta ducimus necessitatibus enim itaque culpa fuga omnis saepe dicta modi iusto unde, numquam quidem aliquam qui nisi reiciendis, esse, libero totam nam consectetur. oacioa2</div>
-                        <div class="message-time">date date date</div>
-                    </div>
-                    <div class="message sent">
-                        <div class="text-message">cioacioacioa1</div>
-                        <div class="message-time">date date date</div>
-                    </div>
-                    <div class="message delivered">
-                        <div class="text-message">cioacioacioa2</div>
-                        <div class="message-time">date date date</div>
-                    </div>
+                    
                 </div>
 
                 <div class="text-input">
@@ -181,5 +144,7 @@
         </div>
             <!-- /APP WINDOW -->
     </div>
+
+    <script src="./js/contacts-boolzapp.js"></script>
 </body>
 </html>
