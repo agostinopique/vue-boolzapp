@@ -64,7 +64,11 @@
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </div>
                     <div class="search-bar">
-                        <input type="text" placeholder="Cerca o inizia una nuova chat" id="chat-search">
+                        <input 
+                            v-model="searchUser"
+                            type="text" 
+                            placeholder="Cerca o inizia una nuova chat" 
+                            id="chat-search">
                     </div>
                 </div>
 
@@ -80,7 +84,7 @@
                         <div class="contact-info">
                             <div class="status-info">
                                 <h3>{{user.name}}</h3>
-                                <p class="last-message">{{users[index].messages[1].message}}</p>
+                                <p class="last-message">{{users[index].messages[getLastDate(user)]}}</p>
                             </div>
                             <div class="date-last-msg">
                                 <p>{{users[index].messages[1].date}}</p>

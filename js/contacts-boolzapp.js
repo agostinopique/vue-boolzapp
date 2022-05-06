@@ -172,10 +172,16 @@ const app = new Vue({
         ],
 
         activeUser: 0,
-        newMessage: ''
+        newMessage: '',
+        searchUser: ''
     },
 
     methods: {
+
+        getLastDate(user){
+            return this.user
+        }
+
         newMessageData(){
             const today = new Date();
             const actualDay = today.getDay();
@@ -209,20 +215,31 @@ const app = new Vue({
             if(this.newMessage.length > 0){
                 this.users[this.activeUser].messages.push(newMsg);
                 this.newMessage = '';
+                
+                setTimeout((actualDate) => {
+    
+                    const newReply =  {
+                        date: actualDate,
+                        message: 'You can run but you can\'t hide Bitch!',
+                        status: 'received'
+                    };
+    
+                    this.users[this.activeUser].messages.push(newReply);
+                }, 2000);
             };
-
-            setTimeout( newReply(actualDate), 1500);
+            
         },
 
-        newReply(actualDate){
-            const newMsg =  {
-                date: actualDate,
-                message: 'Ma vai in culo!',
-                status: 'received'
-            }
+        // newReply(actualDate){
 
-            this.users[this.activeUser].messages.push(newMsg);
-        }
+        //     const newReply =  {
+        //         date: actualDate,
+        //         message: 'Fuck off!',
+        //         status: 'received'
+        //     };
+        //     this.users[this.activeUser].messages.push(newReply);
+            
+        // }
     }
 
 })
