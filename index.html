@@ -124,11 +124,26 @@
 
                 <div class="text-area">
                     <div
-                        v-for="envelope in users[activeUser].messages"
+                        v-for="(envelope, index) in users[activeUser].messages"
                         :class="envelope.status"
                         class="message">
-                        <div class="text-message">{{envelope.message}}</div>
-                        <div class="message-time">{{envelope.date}}</div>
+                        <a href="#" 
+                            id="msg-chevron"
+                            @click="">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </a>
+                        <div 
+                            class="drop-down"
+                            :class="(envelope.status === 'sent') ? 'drp-dwn-sent' : ''">
+                            <p>Info messaggio</p>
+                            <p
+                                @click="deleteMsg(index)">
+                                Cancella messaggio</p>
+                        </div>
+                        <div v-show="users[activeUser].messages != undefined">
+                            <div class="text-message">{{envelope.message}}</div>
+                            <div class="message-time">{{envelope.date}}</div>
+                        </div>
                     </div>
                     
                 </div>

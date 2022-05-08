@@ -178,6 +178,10 @@ const app = new Vue({
 
     methods: {
 
+        deleteMsg(index){
+            this.users[this.activeUser].messages.splice(index, 1);
+        },
+
         findUser(){
             const searchUser = this.searchUser.toLowerCase();
             console.log(searchUser);
@@ -197,15 +201,14 @@ const app = new Vue({
 
         newMessageData(){
 
-            // AGGIUSTARE MECCANISMO DI CREAZIONE DELL'ORA
             const today = new Date();
-            const actualDay = today.getDay();
-            const actualMonth = (today.getMonth()+1);
-            const actualHour = today.getHours();
-            const actualMin = today.getMinutes();
-            const actualSec = today.getSeconds();
+            const day = today.getDate();
+            const month = (today.getMonth()+1);
+            const h = today.getHours();
+            const m = today.getMinutes();
+            const s = today.getSeconds();
 
-            function dateAdjust(actualNumber){
+            function date(actualNumber){
                 
                 if(actualNumber < 10){
                     return '0' + actualNumber;
@@ -215,13 +218,14 @@ const app = new Vue({
 
 
             const actualDate = 
-                dateAdjust(actualDay) + '/' + 
-                dateAdjust(actualMonth) + '/' + 
+                date(day) + '/' + 
+                date(month) + '/' + 
                 today.getFullYear() + ' ' + 
-                dateAdjust(actualHour) + ':' +
-                dateAdjust(actualMin) + ':' + 
-                dateAdjust(actualSec);
+                date(h) + ':' +
+                date(m) + ':' + 
+                date(s);
             
+
             const newMsg =  {
                 date: actualDate,
                 message: this.newMessage,
@@ -245,14 +249,7 @@ const app = new Vue({
         },
 
         
-    },
-
-    mounted: {
-        // capitalizeModels(){
-        //     this.searchUser = this.searchUser.capitalize();
-        // }
     }
-
 })
     
     
