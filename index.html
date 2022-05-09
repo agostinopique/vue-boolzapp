@@ -14,10 +14,9 @@
 
     <!-- DAYJS -->
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.2/dayjs.min.js"></script>
-    <!-- localizzazione -->
-    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.2/locale/it.jss"></script>
     <!-- format plugin -->
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.2/plugin/customParseFormat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.2/plugin/relativeTime.js"></script>
 
 
 
@@ -106,7 +105,10 @@
                             <!-- NOME E ULTIMO MESSAGGIO -->
                             <div class="status-info">
                                 <h3>{{user.name}}</h3>
-                                <p class="last-message">{{getLastMessage(user)}}</p>
+                                <p 
+                                class="last-message">
+                                {{getLastMessage(user)}}</p>
+
                             </div>
                             <!-- /NOME E ULTIMO MESSAGGIO -->
 
@@ -143,7 +145,7 @@
                             
                             <div class="user-info">
                                 <h3>{{users[activeUser].name}}</h3>
-                                <p class="last-access">Ultimo accesso oggi alle</p>
+                                <p class="last-access">Ultimo accesso: {{lastSeen()}}</p>
                             </div>
 
                             <div class="user-icons">
@@ -164,14 +166,14 @@
 
                     <!-- BOX DEL MESSAGGIO -->
                     <div
-                        v-for="(envelope, index) in users[activeUser].messages"
+                        v-for="(envelope, msgIndex) in users[activeUser].messages"
                         :class="envelope.status"
                         class="message">
                         
                         <!-- CHEVRON PER L'ELIMINAZIONE E INFO MESSAGGIO -->
                         <a href="#" 
                             id="msg-chevron"
-                            @click="">
+                            @click="messageInfo(msgIndex)">
                             <i class="fa-solid fa-chevron-down"></i>
                         </a>
                         <!-- /CHEVRON PER L'ELIMINAZIONE E INFO MESSAGGIO -->
@@ -179,10 +181,11 @@
                         <!-- OPZIONI INFO E ELIMINA MESSAGGIO -->
                         <div 
                             class="drop-down"
-                            :class="(envelope.status === 'sent') ? 'drp-dwn-sent' : ''">
+                            :class="(envelope.status === 'sent') ? 'drp-dwn-sent' : ''"
+                            v-if="lastAccess && msgClicked === msgIndex">
                             <p>Info messaggio</p>
                             <p
-                                @click="deleteMsg(index)">
+                                @click="deleteMsg(msgIndex)">
                                 Cancella messaggio</p>
                         </div>
                         <!-- /OPZIONI INFO E ELIMINA MESSAGGIO -->

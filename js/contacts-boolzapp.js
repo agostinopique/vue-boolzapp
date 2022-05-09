@@ -1,7 +1,8 @@
 
 
 dayjs.extend(window.dayjs_plugin_customParseFormat);
-dayjs.locale('it');
+dayjs.extend(window.dayjs_plugin_relativeTime);
+
 
 const app = new Vue({
     el: '#app',
@@ -178,26 +179,58 @@ const app = new Vue({
 
         activeUser: 0,
         newMessage: '',
-        searchUser: ''
+        searchUser: '',
+        lastAccess: false,
+        msgClicked: 0
     },
 
     methods: {
 
+        messageInfo(msgIndex){
+
+            this.msgClicked = msgIndex;
+
+            if(!this.lastAccess){
+                this.lastAccess = true;
+            } else {
+                this.lastAccess = false;
+            }
+        },
+
         // FUNZIONE PER L'ELIMINAZIONE DEI MESSAGGI IN CHAT
-        deleteMsg(index){
-            this.users[this.activeUser].messages.splice(index, 1);
+        deleteMsg(msgIndex){
+            this.users[this.activeUser].messages.splice(msgIndex, 1);
         },
 
         // FUNZIONE PER IL RECUPERO DELL'ULTIMO MESSAGGIO DI UNA CHAT
         getLastMessage(user){
             const {messages} = user;
-            return messages[messages.length - 1].message;
+            if(messages.length > 0){
+                return messages[messages.length - 1].message;
+            };
+            return 'Nessun messaggio'
         },
 
         // FUNZIONE PER IL RECUPERO DELL'ULTIMOA DATA DI UNA CHAT
         getLastDate(user){
             const {messages} = user;
-            return messages[messages.length - 1].date;
+            if(messages.length > 0){
+                return messages[messages.length - 1].date;
+            };
+            return '---'
+        },
+
+        // VISTO L'ULTIMA VOLTA
+        lastSeen(){
+            const utenteAttivo = this.users[this.activeUser];
+            const mesUtenteAtt = utenteAttivo.messages;
+
+            if(mesUtenteAtt.length > 0){
+                const lastMsg = mesUtenteAtt[mesUtenteAtt.length - 1];
+                return lastMsg.date
+            } 
+
+            return '---'
         },
 
         // FUNZIONE PER LA CREAZIONE DI UN NUOVO MESSAGGIO ALL'INVIO 
@@ -269,7 +302,7 @@ const app = new Vue({
             }
             return n
         } */
-        
+
     }
 })
 
