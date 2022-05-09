@@ -186,15 +186,10 @@ const app = new Vue({
 
     methods: {
 
+        // FUNZIONE PER IL CONTROLLO DEI SINGOLI DROPDOWN
         messageInfo(msgIndex){
-
             this.msgClicked = msgIndex;
-
-            if(!this.lastAccess){
-                this.lastAccess = true;
-            } else {
-                this.lastAccess = false;
-            }
+            this.lastAccess = this.lastAccess ? false : true ; 
         },
 
         // FUNZIONE PER L'ELIMINAZIONE DEI MESSAGGI IN CHAT
@@ -205,19 +200,13 @@ const app = new Vue({
         // FUNZIONE PER IL RECUPERO DELL'ULTIMO MESSAGGIO DI UNA CHAT
         getLastMessage(user){
             const {messages} = user;
-            if(messages.length > 0){
-                return messages[messages.length - 1].message;
-            };
-            return 'Nessun messaggio'
+            return (messages.length > 0) ? messages[messages.length - 1].message : 'Nessun messaggio';
         },
 
         // FUNZIONE PER IL RECUPERO DELL'ULTIMOA DATA DI UNA CHAT
         getLastDate(user){
             const {messages} = user;
-            if(messages.length > 0){
-                return messages[messages.length - 1].date;
-            };
-            return '---'
+            return (messages.length > 0) ? messages[messages.length - 1].date : '---'
         },
 
         // VISTO L'ULTIMA VOLTA
