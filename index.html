@@ -12,6 +12,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 
+    <!-- DAYJS -->
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.2/dayjs.min.js"></script>
+    <!-- localizzazione -->
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.2/locale/it.jss"></script>
+    <!-- format plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.2/plugin/customParseFormat.js"></script>
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
@@ -34,6 +41,8 @@
                 <!-- MY PROFILE -->
                 <div class="my-profile">
                     <div class="my-info">
+                        
+                        <!-- IMMAGINE DI PROFILO E NOME UTENTE -->
                         <div class="profile-img">
                             <img :src="`./img/avatar${myUser.avatar}.jpg`" :alt="myUser.name">
                         </div>
@@ -46,7 +55,8 @@
                     </div>
                 </div>
                 <!-- /MY PROFILE -->
-
+                
+                <!-- BARRA DELLE NOTIFICHE DESKTOP -->
                 <div class="notifications">
                     <div class="notification-img">
                         <span>
@@ -58,21 +68,24 @@
                         <a href="#">Attiva notifiche desktop</a>
                     </div>
                 </div>
+                <!-- /BARRA DELLE NOTIFICHE DESKTOP -->
 
+                <!-- BARRA DI SEARCH DELLE CHAT -->
                 <div class="search-chat">
                     <div class="magnifier">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </div>
                     <div class="search-bar">
                         <input
-                            @keyup.enter="findUser()"
                             v-model.trim="searchUser"
                             type="text" 
                             placeholder="Cerca o inizia una nuova chat" 
                             id="chat-search">
                     </div>
                 </div>
+                <!-- /BARRA DI SEARCH DELLE CHAT -->
 
+                <!-- SEZIONE DELLE CHAT ATTIVE -->
                 <div class="active-chats">
 
                     <div 
@@ -80,21 +93,36 @@
                         v-show="user.name.toLowerCase().includes(searchUser)"
                         class="chat"
                         @click="activeUser = index">
+
+                        <!-- IMMAGINE DI PROFILO -->
                         <div class="contact-img">
                             <img :src="`./img/avatar${user.avatar}.jpg`" :alt="user.name">
                         </div>
+                        <!-- IMMAGINE DI PROFILO -->
+                        
+                        <!-- INFO CONTATTO -->
                         <div class="contact-info">
+
+                            <!-- NOME E ULTIMO MESSAGGIO -->
                             <div class="status-info">
                                 <h3>{{user.name}}</h3>
                                 <p class="last-message">{{getLastMessage(user)}}</p>
                             </div>
+                            <!-- /NOME E ULTIMO MESSAGGIO -->
+
+                            <!-- DATA ULTIMO MESSAGGIO -->
                             <div class="date-last-msg">
                                 <p>{{getLastDate(user)}}</p>
                             </div>
-                        </div>
-                    </div>
+                            <!-- /DATA ULTIMO MESSAGGIO -->
 
+                        </div>
+                        <!-- /INFO CONTATTO -->
+
+                    </div>
                 </div>
+                <!-- /SEZIONE DELLE CHAT ATTIVE -->
+
 
             </div>
             <!-- /CONTACTS SECTION -->
@@ -104,34 +132,51 @@
 
                 <div class="active-user">
                     <div class="user">
+
+                        <!--  IMMAGINE UTENTE  -->
                         <div class="contact-img">
                             <img :src="`./img/avatar${users[activeUser].avatar}.jpg`" :alt="users[activeUser].avatar">
                         </div>
+
+                        <!-- NOME UTENTE E ULTIMO ACCESSO  -->
                         <div class="contact-info ">
+                            
                             <div class="user-info">
                                 <h3>{{users[activeUser].name}}</h3>
                                 <p class="last-access">Ultimo accesso oggi alle</p>
                             </div>
+
                             <div class="user-icons">
                                 <i class="fa-solid fa-magnifying-glass"></i>
                                 <i class="fa-solid fa-paperclip"></i>
                                 <i class="fa-solid fa-ellipsis-vertical"></i>
                             </div>
+
                         </div>
+                        <!-- /NOME UTENTE E ULTIMO ACCESSO  -->
+
                     </div>
                     
                 </div>
 
+                <!-- BOX DEI MESSAGGI -->
                 <div class="text-area">
+
+                    <!-- BOX DEL MESSAGGIO -->
                     <div
                         v-for="(envelope, index) in users[activeUser].messages"
                         :class="envelope.status"
                         class="message">
+                        
+                        <!-- CHEVRON PER L'ELIMINAZIONE E INFO MESSAGGIO -->
                         <a href="#" 
                             id="msg-chevron"
                             @click="">
                             <i class="fa-solid fa-chevron-down"></i>
                         </a>
+                        <!-- /CHEVRON PER L'ELIMINAZIONE E INFO MESSAGGIO -->
+                        
+                        <!-- OPZIONI INFO E ELIMINA MESSAGGIO -->
                         <div 
                             class="drop-down"
                             :class="(envelope.status === 'sent') ? 'drp-dwn-sent' : ''">
@@ -140,18 +185,29 @@
                                 @click="deleteMsg(index)">
                                 Cancella messaggio</p>
                         </div>
-                        <div v-show="users[activeUser].messages != undefined">
-                            <div class="text-message">{{envelope.message}}</div>
-                            <div class="message-time">{{envelope.date}}</div>
-                        </div>
+                        <!-- /OPZIONI INFO E ELIMINA MESSAGGIO -->
+
+                        <!-- CONTENUTO E DATA DEL MESSAGGIO -->
+                        <div class="text-message">{{envelope.message}}</div>
+                        <div class="message-time">{{envelope.date}}</div>
+
                     </div>
+                    <!-- /BOX DEL MESSAGGIO -->
+
                     
                 </div>
+                <!-- /BOX DEI MESSAGGI -->
 
+                <!-- INPUT NUOVO MESSAGGIO -->
                 <div class="text-input">
+
+                    <!-- EMOJI -->
                     <div class="text-emoji">
                         <i class="fa-regular fa-face-smile"></i>
                     </div>
+                    <!-- /EMOJI -->
+
+                    <!-- BARRA DI INPUT -->
                     <div class="input-sct">
                         <input
                             @keyup.enter="newMessageData()" 
@@ -159,9 +215,14 @@
                             type="text" 
                             placeholder="Scrivi un messagio">
                     </div>
+                    <!-- /BARRA DI INPUT -->
+
+                    <!-- RECORD AUDIO NOTE -->
                     <div class="audio-record">
                         <i class="fa-solid fa-microphone"></i>
                     </div>
+                    <!-- /RECORD AUDIO NOTE -->
+
                 </div>
             </div>
             <!-- /CHAT SECTION -->

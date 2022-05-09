@@ -270,7 +270,7 @@ body{
 }
 
 .drop-down{
-    display: block;
+    display: none;
     position: absolute;
     top: 30px;
     left: 90%;

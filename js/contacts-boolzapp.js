@@ -1,3 +1,8 @@
+
+
+dayjs.extend(window.dayjs_plugin_customParseFormat);
+dayjs.locale('it');
+
 const app = new Vue({
     el: '#app',
 
@@ -178,29 +183,65 @@ const app = new Vue({
 
     methods: {
 
+        // FUNZIONE PER L'ELIMINAZIONE DEI MESSAGGI IN CHAT
         deleteMsg(index){
             this.users[this.activeUser].messages.splice(index, 1);
         },
 
-        findUser(){
-            const searchUser = this.searchUser.toLowerCase();
-            console.log(searchUser);
-            const userMatch = this.users.filter((user) => user.name.includes(this.searchUser));
-            console.log(userMatch)
-        },
-
+        // FUNZIONE PER IL RECUPERO DELL'ULTIMO MESSAGGIO DI UNA CHAT
         getLastMessage(user){
             const {messages} = user;
             return messages[messages.length - 1].message;
         },
 
+        // FUNZIONE PER IL RECUPERO DELL'ULTIMOA DATA DI UNA CHAT
         getLastDate(user){
             const {messages} = user;
             return messages[messages.length - 1].date;
         },
 
+        // FUNZIONE PER LA CREAZIONE DI UN NUOVO MESSAGGIO ALL'INVIO 
         newMessageData(){
+            
+            // TEMPLATE PER IL MESSAGGIO 
+            const newMsg =  {
+                date:   dayjs().format('DD/MM/YYYY HH:mm:ss'),
+                message: this.newMessage,
+                status: 'sent'
+            }
+            
+            if(this.newMessage.length > 0){
+                this.pushNewMessage(newMsg)
+            }    
 
+            // TIMING FUNCTION PER LA RISPOSTA DEL COMPUTER
+            setTimeout(() => {
+                const newReply =  {
+                    date: dayjs().format('DD/MM/YYYY HH:mm:ss'),
+                    message: 'I\'d like to book a table for Isaac Ocks',
+                    status: 'received'
+                };
+    
+                this.users[this.activeUser].messages.push(newReply);
+            }, 2000);
+            
+        },
+
+        // PUSH SOLO SE É PRESENTE ALMENO UN CARATTERE
+        pushNewMessage(newMsg){
+            
+            this.newMessage = '';
+            
+            setTimeout(() => {
+                this.users[this.activeUser].messages.push(newMsg);
+            }, 500)
+        },
+
+        // FUNZIONE PER IL RECUPERO E FORMAT DELLA DATA E ORARIO DI UNA MESSAGGIO
+        // VERSIONE SENZA DAYJS
+        /* 
+        messageDate(){
+            
             const today = new Date();
             const day = today.getDate();
             const month = (today.getMonth()+1);
@@ -208,51 +249,29 @@ const app = new Vue({
             const m = today.getMinutes();
             const s = today.getSeconds();
 
-            function date(actualNumber){
-                
-                if(actualNumber < 10){
-                    return '0' + actualNumber;
-                }
-                return actualNumber
-            };
-
 
             const actualDate = 
-                date(day) + '/' + 
-                date(month) + '/' + 
-                today.getFullYear() + ' ' + 
-                date(h) + ':' +
-                date(m) + ':' + 
-                date(s);
+            this.date(day) + '/' + 
+            this.date(month) + '/' + 
+            today.getFullYear() + ' ' + 
+            this.date(h) + ':' +
+            this.date(m) + ':' + 
+            this.date(s);
             
-
-            const newMsg =  {
-                date: actualDate,
-                message: this.newMessage,
-                status: 'sent'
-            }
-            if(this.newMessage.length > 0){
-                this.users[this.activeUser].messages.push(newMsg);
-                this.newMessage = '';
-                
-                setTimeout(() => {
-                    const newReply =  {
-                        date: actualDate,
-                        message: 'You can run but you can\'t hide Bitch!',
-                        status: 'received'
-                    };
-    
-                    this.users[this.activeUser].messages.push(newReply);
-                }, 2000);
-            };
-            
+            return actualDate;
         },
 
+        // FUNZIONE DI CONTROLLO PER EVITARE PROBLEMI DI FORMAT NELLA DATA
+        date(n){
+            
+            if(n < 10){
+                return '0' + n;
+            }
+            return n
+        } */
         
     }
 })
-    
-    
 
 
 /* 
