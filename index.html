@@ -182,7 +182,8 @@
                         <div 
                             class="drop-down"
                             :class="(envelope.status === 'sent') ? 'drp-dwn-sent' : ''"
-                            v-if="lastAccess && msgClicked === msgIndex">
+                            v-if="lastAccess && msgClicked === msgIndex"
+                            @mouseleave="lastAccess = 0">
                             <p>Info messaggio</p>
                             <p
                                 @click="deleteMsg(msgIndex)">
